@@ -23,10 +23,10 @@ class TripleGuard(IStrategy):
     startup_candle_count = 50
 
     # Risk management (bot-level config can override these)
-    stoploss = -0.02
+    stoploss = -0.01
     trailing_stop = True
-    trailing_stop_positive = 0.01
-    trailing_stop_positive_offset = 0.02
+    trailing_stop_positive = 0.005
+    trailing_stop_positive_offset = 0.01
     trailing_only_offset_is_reached = True
 
     minimal_roi: dict[str, float] = {"0": 0.005}
