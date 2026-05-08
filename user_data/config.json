@@ -31,10 +31,39 @@
     },
     "pair_whitelist": [
       "BTC/USDT",
-      "ETH/USDT"
+      "ETH/USDT",
+      "BNB/USDT",
+      "SOL/USDT",
+      "XRP/USDT",
+      "ADA/USDT",
+      "DOGE/USDT",
+      "TRX/USDT",
+      "LINK/USDT",
+      "AVAX/USDT",
+      "MATIC/USDT",
+      "DOT/USDT",
+      "LTC/USDT",
+      "BCH/USDT",
+      "ATOM/USDT",
+      "NEAR/USDT",
+      "OP/USDT",
+      "ARB/USDT",
+      "APT/USDT",
+      "SUI/USDT",
+      "FIL/USDT",
+      "ETC/USDT",
+      "XLM/USDT",
+      "UNI/USDT",
+      "SHIB/USDT",
+      "PEPE/USDT",
+      "INJ/USDT",
+      "RUNE/USDT"
     ],
     "pair_blacklist": [
-      "BNB/USDT"
+      ".*UP/USDT",
+      ".*DOWN/USDT",
+      ".*BULL/USDT",
+      ".*BEAR/USDT"
     ]
   },
 

@@ -11,7 +11,7 @@ from pandas import DataFrame
 class TripleGuard(IStrategy):
     """
     Triple-Guard Strategy
-    - Buy: close < BB lower AND RSI(14) < 30 AND MACD histogram > 0
+    - Buy (frequency-tuned): close <= BB lower * 1.005 AND RSI(14) < 35 AND MACD histogram > 0
     - Sell: close > BB upper OR RSI(14) > 70
     - Safeguard: post-loss cooldown via StoplossGuard protection
     """
@@ -29,9 +29,7 @@ class TripleGuard(IStrategy):
     trailing_stop_positive_offset = 0.02
     trailing_only_offset_is_reached = True
 
-    minimal_roi: dict[str, float] = {
-        "0": 0.01
-    }
+    minimal_roi: dict[str, float] = {"0": 0.005}
 
     # Cooldown after a loss to reduce "revenge trading"
     # This is enforced by Freqtrade's protection system.
@@ -71,8 +69,8 @@ class TripleGuard(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
-        conditions.append(dataframe["close"] < dataframe["bb_lower"])
-        conditions.append(dataframe["rsi"] < 30)
+        conditions.append(dataframe["close"] <= (dataframe["bb_lower"] * 1.005))
+        conditions.append(dataframe["rsi"] < 35)
         conditions.append(dataframe["macdhist"] > 0)
 
         if conditions:
