@@ -26,9 +26,10 @@ This suite selects an execution profile via `.env`:
   - uses `BINANCE_TESTNET_API_KEY` / `BINANCE_TESTNET_API_SECRET`
   - `sandbox` enabled
 
-After changing `CONFIG_PROFILE`, restart the container:
+After changing `CONFIG_PROFILE`, generate `.env.runtime` and restart the container:
 
 ```bash
+./scripts/sync-runtime-env.sh
 docker compose down
 docker compose up -d
 ```

@@ -28,6 +28,9 @@ if [[ ! -f ".env" ]]; then
   exit 1
 fi
 
+echo "==> Syncing runtime environment (.env.runtime)"
+bash "./scripts/sync-runtime-env.sh"
+
 echo "==> Pull/build/restart containers"
 docker compose pull || true
 docker compose up -d --build

@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+      - .env.runtime
     volumes:
       - ./user_data:/freqtrade/user_data
     ports:
