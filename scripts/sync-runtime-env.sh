@@ -20,9 +20,10 @@ if [[ ! -f "$ENV_FILE" ]]; then
   exit 1
 fi
 
+# Support Windows-style CRLF in .env by stripping trailing \r.
 # shellcheck disable=SC1090
 set -a
-source "$ENV_FILE"
+source <(sed 's/\r$//' "$ENV_FILE")
 set +a
 
 PROFILE="${CONFIG_PROFILE:-demo}"
