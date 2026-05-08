@@ -34,6 +34,22 @@ docker compose down
 docker compose up -d
 ```
 
+### One-command switch (recommended)
+
+On the VPS you can switch and restart in one command:
+
+```bash
+bash ./scripts/switch-mode.sh demo
+# or: bash ./scripts/switch-mode.sh testnet
+# or: bash ./scripts/switch-mode.sh live
+```
+
+To only update `.env` + `.env.runtime` without restarting:
+
+```bash
+bash ./scripts/switch-mode.sh demo --no-restart
+```
+
 Stop:
 
 ```bash
