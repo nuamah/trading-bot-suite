@@ -4,7 +4,7 @@ from functools import reduce
 from typing import Any
 
 import talib.abstract as ta
-from freqtrade.strategy import IStrategy
+from freqtrade.strategy import IStrategy, informative
 from pandas import DataFrame
 
 
@@ -66,8 +66,19 @@ class TripleGuard(IStrategy):
 
         return dataframe
 
+    @informative("1h")
+    def populate_indicators_1h(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        dataframe["ema200"] = ta.EMA(dataframe, timeperiod=200)
+        dataframe["rsi"] = ta.RSI(dataframe, timeperiod=14)
+        return dataframe
+
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
+
+        # Regime filter: avoid catching falling knives.
+        # Only take mean-reversion entries when 1h trend is not bearish.
+        conditions.append(dataframe["close_1h"] > dataframe["ema200_1h"])
+        conditions.append(dataframe["rsi_1h"] > 40)
 
         conditions.append(dataframe["close"] <= (dataframe["bb_lower"] * 1.003))
         conditions.append(dataframe["rsi"] < 33)

@@ -60,6 +60,9 @@
       "RUNE/USDT"
     ],
     "pair_blacklist": [
+      "BCH/USDT",
+      "PEPE/USDT",
+      "OP/USDT",
       ".*UP/USDT",
       ".*DOWN/USDT",
       ".*BULL/USDT",
