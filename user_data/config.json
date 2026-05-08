@@ -125,6 +125,9 @@
   "bot_name": "triple-guard",
   "initial_state": "running",
   "force_entry_enable": false,
+  "use_exit_signal": true,
+  "exit_profit_only": true,
+  "exit_profit_offset": 0.005,
   "cancel_open_orders_on_exit": false,
 
   "internals": {

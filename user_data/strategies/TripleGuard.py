@@ -11,7 +11,7 @@ from pandas import DataFrame
 class TripleGuard(IStrategy):
     """
     Triple-Guard Strategy
-    - Buy (frequency-tuned): close <= BB lower * 1.005 AND RSI(14) < 35 AND MACD histogram > 0
+    - Buy (frequency-tuned): close <= BB lower * 1.003 AND RSI(14) < 33 AND MACD histogram > 0
     - Sell: close > BB upper OR RSI(14) > 70
     - Safeguard: post-loss cooldown via StoplossGuard protection
     """
@@ -69,8 +69,8 @@ class TripleGuard(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
-        conditions.append(dataframe["close"] <= (dataframe["bb_lower"] * 1.005))
-        conditions.append(dataframe["rsi"] < 35)
+        conditions.append(dataframe["close"] <= (dataframe["bb_lower"] * 1.003))
+        conditions.append(dataframe["rsi"] < 33)
         conditions.append(dataframe["macdhist"] > 0)
 
         if conditions:
