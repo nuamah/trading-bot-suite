@@ -78,7 +78,7 @@ class TripleGuard(IStrategy):
         # Regime filter: avoid catching falling knives.
         # Only take mean-reversion entries when 1h trend is not bearish.
         conditions.append(dataframe["close_1h"] > dataframe["ema200_1h"])
-        conditions.append(dataframe["rsi_1h"] > 40)
+        conditions.append(dataframe["rsi_1h"] > 35)
 
         conditions.append(dataframe["close"] <= (dataframe["bb_lower"] * 1.003))
         conditions.append(dataframe["rsi"] < 33)
