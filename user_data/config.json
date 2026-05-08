@@ -33,17 +33,17 @@
       "BTC/USDT",
       "TRX/USDT",
       "NEAR/USDT",
-      "ARB/USDT",
       "INJ/USDT",
       "XLM/USDT",
-      "DOT/USDT",
       "LTC/USDT",
-      "LINK/USDT",
-      "ATOM/USDT",
-      "SUI/USDT",
-      "UNI/USDT"
+      "SUI/USDT"
     ],
     "pair_blacklist": [
+      "ARB/USDT",
+      "ATOM/USDT",
+      "LINK/USDT",
+      "DOT/USDT",
+      "UNI/USDT",
       "BCH/USDT",
       "ETH/USDT",
       "SHIB/USDT",

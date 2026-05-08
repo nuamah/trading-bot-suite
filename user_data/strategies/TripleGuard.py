@@ -22,11 +22,11 @@ class TripleGuard(IStrategy):
     process_only_new_candles = True
     startup_candle_count = 50
 
-    # Risk management (bot-level config can override these)
-    stoploss = -0.01
+    # Risk management (user_data/config.json overrides these at runtime)
+    stoploss = -0.02
     trailing_stop = True
-    trailing_stop_positive = 0.005
-    trailing_stop_positive_offset = 0.01
+    trailing_stop_positive = 0.01
+    trailing_stop_positive_offset = 0.02
     trailing_only_offset_is_reached = True
 
     minimal_roi: dict[str, float] = {"0": 0.005}
@@ -78,7 +78,7 @@ class TripleGuard(IStrategy):
         # Regime filter: avoid catching falling knives.
         # Only take mean-reversion entries when 1h trend is not bearish.
         conditions.append(dataframe["close_1h"] > dataframe["ema200_1h"])
-        conditions.append(dataframe["rsi_1h"] > 35)
+        conditions.append(dataframe["rsi_1h"] > 32)
 
         conditions.append(dataframe["close"] <= (dataframe["bb_lower"] * 1.003))
         conditions.append(dataframe["rsi"] < 33)
