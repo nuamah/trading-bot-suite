@@ -11,11 +11,8 @@ services:
     ports:
       - "8080:8080"
     command:
-      - trade
-      - --config
-      - ${FREQTRADE_CONFIG_FILE:-/freqtrade/user_data/config.json}
-      - --strategy
-      - TripleGuard
+      - bash
+      - /freqtrade/user_data/run.sh
     environment:
       FREQTRADE__EXCHANGE__KEY: ${BINANCE_ACTIVE_API_KEY}
       FREQTRADE__EXCHANGE__SECRET: ${BINANCE_ACTIVE_API_SECRET}

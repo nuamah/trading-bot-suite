@@ -9,26 +9,37 @@ case "$PROFILE" in
     SANDBOX=false
     API_KEY="${BINANCE_DEMO_API_KEY:-}"
     API_SECRET="${BINANCE_DEMO_API_SECRET:-}"
+    SRC_CONFIG="/freqtrade/user_data/config.json"
     ;;
   live)
     DRY_RUN=false
     SANDBOX=false
     API_KEY="${BINANCE_LIVE_API_KEY:-}"
     API_SECRET="${BINANCE_LIVE_API_SECRET:-}"
+    SRC_CONFIG="/freqtrade/user_data/config.json"
     ;;
   testnet)
     DRY_RUN=false
     SANDBOX=true
     API_KEY="${BINANCE_TESTNET_API_KEY:-}"
     API_SECRET="${BINANCE_TESTNET_API_SECRET:-}"
+    SRC_CONFIG="/freqtrade/user_data/config.json"
+    ;;
+  futures)
+    DRY_RUN=true
+    SANDBOX=false
+    API_KEY="${BINANCE_FUTURES_API_KEY:-${BINANCE_LIVE_API_KEY:-}}"
+    API_SECRET="${BINANCE_FUTURES_API_SECRET:-${BINANCE_LIVE_API_SECRET:-}}"
+    SRC_CONFIG="/freqtrade/user_data/config.futures.json"
     ;;
   *)
-    echo "Unknown CONFIG_PROFILE=$PROFILE. Use: demo | live | testnet" >&2
+    echo "Unknown CONFIG_PROFILE=$PROFILE. Use: demo | live | testnet | futures" >&2
     exit 2
     ;;
 esac
 
 export DRY_RUN SANDBOX API_KEY API_SECRET
+export SRC_CONFIG
 
 python3 - <<'PY'
 import json
@@ -37,6 +48,7 @@ import os
 src = "/freqtrade/user_data/config.json"
 dst = "/tmp/freqtrade-config.json"
 
+src = os.environ.get("SRC_CONFIG", src)
 with open(src, "r", encoding="utf-8") as f:
     cfg = json.load(f)
 
