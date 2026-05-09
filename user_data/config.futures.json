@@ -39,8 +39,7 @@
       "LTC/USDT:USDT",
       "SUI/USDT:USDT",
       "SOL/USDT:USDT",
-      "ADA/USDT:USDT",
-      "LINK/USDT:USDT"
+      "ADA/USDT:USDT"
     ],
     "pair_blacklist": [
       "ETH/USDT:USDT",
