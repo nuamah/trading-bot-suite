@@ -3,6 +3,8 @@ services:
     image: freqtradeorg/freqtrade:stable
     container_name: freqtrade
     restart: unless-stopped
+    entrypoint:
+      - bash
     env_file:
       - .env
       - .env.runtime
@@ -11,7 +13,6 @@ services:
     ports:
       - "8080:8080"
     command:
-      - bash
       - /freqtrade/user_data/run.sh
     environment:
       FREQTRADE__EXCHANGE__KEY: ${BINANCE_ACTIVE_API_KEY}
