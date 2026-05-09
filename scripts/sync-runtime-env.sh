@@ -10,6 +10,7 @@ set -euo pipefail
 # - demo    (dry-run, mainnet public endpoints; keys optional)
 # - live    (live trading, mainnet)
 # - testnet (spot sandbox)
+# - futures (binance futures, isolated, conservative leverage)
 
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ENV_FILE="${APP_DIR}/.env"
@@ -34,21 +35,31 @@ case "$PROFILE" in
     BINANCE_ACTIVE_API_SECRET="${BINANCE_DEMO_API_SECRET:-}"
     BINANCE_SANDBOX="false"
     FREQTRADE_DRY_RUN="true"
+    FREQTRADE_CONFIG_FILE="/freqtrade/user_data/config.json"
     ;;
   live)
     BINANCE_ACTIVE_API_KEY="${BINANCE_LIVE_API_KEY:-}"
     BINANCE_ACTIVE_API_SECRET="${BINANCE_LIVE_API_SECRET:-}"
     BINANCE_SANDBOX="false"
     FREQTRADE_DRY_RUN="false"
+    FREQTRADE_CONFIG_FILE="/freqtrade/user_data/config.json"
     ;;
   testnet)
     BINANCE_ACTIVE_API_KEY="${BINANCE_TESTNET_API_KEY:-}"
     BINANCE_ACTIVE_API_SECRET="${BINANCE_TESTNET_API_SECRET:-}"
     BINANCE_SANDBOX="true"
     FREQTRADE_DRY_RUN="false"
+    FREQTRADE_CONFIG_FILE="/freqtrade/user_data/config.json"
+    ;;
+  futures)
+    BINANCE_ACTIVE_API_KEY="${BINANCE_FUTURES_API_KEY:-${BINANCE_LIVE_API_KEY:-}}"
+    BINANCE_ACTIVE_API_SECRET="${BINANCE_FUTURES_API_SECRET:-${BINANCE_LIVE_API_SECRET:-}}"
+    BINANCE_SANDBOX="false"
+    FREQTRADE_DRY_RUN="true"
+    FREQTRADE_CONFIG_FILE="/freqtrade/user_data/config.futures.json"
     ;;
   *)
-    echo "ERROR: Unknown CONFIG_PROFILE: $PROFILE (expected demo|live|testnet)" >&2
+    echo "ERROR: Unknown CONFIG_PROFILE: $PROFILE (expected demo|live|testnet|futures)" >&2
     exit 1
     ;;
 esac
@@ -66,6 +77,7 @@ BINANCE_ACTIVE_API_KEY=${BINANCE_ACTIVE_API_KEY}
 BINANCE_ACTIVE_API_SECRET=${BINANCE_ACTIVE_API_SECRET}
 BINANCE_SANDBOX=${BINANCE_SANDBOX}
 FREQTRADE_DRY_RUN=${FREQTRADE_DRY_RUN}
+FREQTRADE_CONFIG_FILE=${FREQTRADE_CONFIG_FILE}
 FREQTRADE_API_USERNAME=${FREQTRADE_API_USERNAME}
 FREQTRADE_API_PASSWORD=${FREQTRADE_API_PASSWORD}
 FREQTRADE_API_JWT_SECRET_KEY=${FREQTRADE_API_JWT_SECRET_KEY}

@@ -13,7 +13,7 @@ services:
     command:
       - trade
       - --config
-      - /freqtrade/user_data/config.json
+      - ${FREQTRADE_CONFIG_FILE:-/freqtrade/user_data/config.json}
       - --strategy
       - TripleGuard
     environment:

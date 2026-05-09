@@ -7,6 +7,7 @@ set -euo pipefail
 #   bash scripts/switch-mode.sh demo
 #   bash scripts/switch-mode.sh testnet
 #   bash scripts/switch-mode.sh live
+#   bash scripts/switch-mode.sh futures
 #
 # Optional:
 #   --no-restart   Only write .env + .env.runtime (do not restart containers)
@@ -23,9 +24,9 @@ if [[ -z "$PROFILE" ]]; then
 fi
 
 case "$PROFILE" in
-  demo|testnet|live) ;;
+  demo|testnet|live|futures) ;;
   *)
-    echo "ERROR: Invalid profile: $PROFILE (expected demo|testnet|live)" >&2
+    echo "ERROR: Invalid profile: $PROFILE (expected demo|testnet|live|futures)" >&2
     exit 2
     ;;
 esac
