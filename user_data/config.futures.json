@@ -33,10 +33,22 @@
     },
     "pair_whitelist": [
       "BTC/USDT:USDT",
-      "ETH/USDT:USDT",
-      "BNB/USDT:USDT"
+      "TRX/USDT:USDT",
+      "NEAR/USDT:USDT",
+      "INJ/USDT:USDT",
+      "XLM/USDT:USDT",
+      "LTC/USDT:USDT",
+      "SUI/USDT:USDT",
+      "SOL/USDT:USDT",
+      "XRP/USDT:USDT",
+      "ADA/USDT:USDT",
+      "DOGE/USDT:USDT",
+      "AVAX/USDT:USDT",
+      "LINK/USDT:USDT"
     ],
     "pair_blacklist": [
+      "ETH/USDT:USDT",
+      "BNB/USDT:USDT",
       ".*_PERP",
       ".*UP/USDT:USDT",
       ".*DOWN/USDT:USDT",
